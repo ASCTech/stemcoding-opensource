@@ -1,0 +1,4 @@
+=content_for(:title, "Edit #{@lab.compose}")
+
+= render "form", programming_lab: @lab, url: [:admin, @course, @lab]
+= link_to "Cancel", :back, class: "btn btn-default"

@@ -1,0 +1,10 @@
+!!!
+%html
+  = render "shared/head"
+  = render 'shared/p5_includes'
+  %script{type:"text/x-mathjax-config"}
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  %body
+    = render "shared/header"
+    #content.container-fluid
+      = yield

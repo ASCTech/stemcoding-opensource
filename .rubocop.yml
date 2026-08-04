@@ -1,0 +1,35 @@
+inherit_from: .rubocop_todo.yml
+
+plugins:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: disable
+  TargetRubyVersion: 3.4
+  TargetRailsVersion: 7.2
+
+Rails:
+  Enabled: true
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - "app/controllers/application_controller.rb"
+
+Rails/Output:
+  Exclude:
+    - 'db/seeds.rb'
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Exclude:
+    - "lib/tasks/auto_annotate_models.rake"
+
+Rails/UnknownEnv:
+  Enabled: false

@@ -1,0 +1,21 @@
+.card
+  %h5.card-header= link_to @course.compose, student_course_path(@course)
+  %table.table.table-striped.table-bordered.card-table
+    %thead
+      %tr
+        %th Assignment Name
+        %th Grade
+        %th Teacher Comment
+    %tbody
+      - @course_labs.each do |course_lab|
+        %tr{id: "course-lab-#{course_lab.id}"}
+          %td= link_to course_lab.lab_title, student_course_programming_lab_path(course_lab)
+          - submission = @enrollment.latest_submission_for_lab(course_lab.programming_lab)
+          - if submission.present?
+            %td= submission.decorate.grade
+            %td= submission.instructor_comment
+          - else
+            %td.danger{colspan:"2"}
+              No submission, #{link_to "click here", new_student_course_programming_lab_submission_path(course_lab)} to create a new submission.
+
+= link_to "Back", :back, class: "btn btn-warning"

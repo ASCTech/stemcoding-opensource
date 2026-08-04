@@ -1,0 +1,27 @@
+- header_content ||= link_to 'Users', [:admin, :users]
+- window ||= 5
+- row_count ||= 2
+- param_name ||= :user_page
+
+#users.card
+  .card-header
+    %h5.mb-0.card-title.text-center= header_content
+
+  .card-body
+    - if users.any?
+      %p.mb-0 The students enrolled in this course are listed below.
+    - else
+      %p.mb-0 This course does not have any students.
+
+  -if users.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - users.in_groups_of(row_count, false) do |user_rows|
+          %tr
+            - user_rows.each do |user|
+              %td= link_to user.complete_name, [:admin, user]
+
+  - paginate_content = paginate users, param_name: param_name, window: window
+  - unless paginate_content.blank?
+    .card-footer.text-center
+      = paginate_content

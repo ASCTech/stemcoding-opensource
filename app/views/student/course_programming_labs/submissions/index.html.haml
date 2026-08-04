@@ -1,0 +1,12 @@
+%h1#page-header Submissions for #{link_to @course_lab.lab_title, [:student,  @course_lab]}
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Submitted On:
+      %th Submission
+  %tbody#submissions
+    - @submissions.each_with_index do |submission, index|
+      %tr
+        %td= submission.created_at.localtime
+        %td= link_to "Submission ##{index+1}", [:student, @course_lab, submission], class: "submission"

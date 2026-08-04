@@ -1,0 +1,28 @@
+.card
+  %h5.card-header
+    Your saved projects
+  - if @code_projects.any?
+    %table#code-projects.table.card-table
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Actions
+      %tbody
+        - @code_projects.each do |code_project|
+          %tr{id: "code-project-#{code_project.id}"}
+            %td= link_to code_project.name, code_project
+            %td= code_project.description.html_safe
+            %td{style: "width: 10em;"}
+              .btn-group.border{role: "group", aria: { label: "Code project actions" }}
+                = link_to "Submit",  new_code_project_submission_path(code_project), class: "btn btn-success border"
+                = link_to "Open", ide_path(query: code_project.gen_signed_message), class: "btn btn-primary border"
+                .btn-group{role: "group"}
+                  = dropdown_toggle(id: "code-project-#{code_project.id}-actions", classes: %w[btn-light]) do
+                    %span.caret
+                    %span.sr-only Code Project Actions Dropdown
+                  .dropdown-menu.border.dropdown-menu-right{aria: { labelledby: "code-project-#{code_project.id}-actions" }}
+                    = link_to "Delete", code_project_path(code_project), method: :delete, class: "btn btn-danger btn-block dropdown-item"
+  - else
+    .card-body
+      You currently don't have any saved code projects.

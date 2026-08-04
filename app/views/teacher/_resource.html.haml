@@ -1,0 +1,20 @@
+.card
+  %h5.card-header#title= resource.compose
+  .card-body
+    %dl.row
+      - if resource.respond_to? :teachers
+        %dt.col-sm-3 Teachers:
+        %dd.col-sm-9
+          - if resource.teachers.any?
+            %ul
+              - resource.teachers.distinct.order_by_last_name.map(&:complete_name).each do |teacher_name|
+                %li= teacher_name
+
+        %dt.col-sm-3 Created by:
+        %dd.col-sm-9= resource.creator.complete_name
+
+        %dt.col-sm-3 Created on:
+        %dd.col-sm-9= resource.created_at
+
+        %dt.col-sm-3 Last modified:
+        %dd.col-sm-9= resource.updated_at

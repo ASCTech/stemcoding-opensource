@@ -1,0 +1,29 @@
+- header_content ||= link_to 'Courses', %i[teacher courses]
+- message ||= ""
+- window ||= 5
+- row_count ||= 2
+- show_create ||= true
+#courses.card
+  %h5.card-header
+    .text-center= header_content
+
+  - if show_create
+    = link_to 'Create a new course', [:new, :teacher, :course], class: 'btn btn-success btn-block square-border'
+    = link_to 'View templates', [:teacher, :course_templates], class: 'btn btn-info btn-block square-border'
+
+  - unless message.blank?
+    %ul.list-group.list-group-flush
+      %li.list-group-item= message
+
+  - if courses.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - courses.in_groups_of(row_count, false) do |course_rows|
+          %tr
+            - course_rows.each do |course|
+              %td= link_to course.compose, [:teacher, course]
+
+  - paginate_content = paginate courses, param_name: :course_page, window: window
+  - unless paginate_content.blank?
+    .panel-body.text-center
+      = paginate_content

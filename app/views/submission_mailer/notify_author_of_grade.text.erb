@@ -1,0 +1,8 @@
+Dear <%= @submission.author_full_name %>,
+
+Your submission for <%= @course_lab.title %> has been graded. You may it by going to the link below:
+
+<%= student_course_programming_lab_submission_url(@course_lab, @submission) %>
+
+Sincerely,
+The Stemcoding Staff

@@ -1,0 +1,15 @@
+= content_for(:title, @lab.compose)
+
+.card
+  %h5.card-header= @lab.compose
+  .card-body
+    %div Created by: #{@lab.creator.complete_name}
+    %div Created on: #{@lab.created_at}
+    %div Last modified: #{@lab.updated_at}
+
+  .card-header Instructions
+  .card-body= @lab.safe_display_content(:admin)
+  .card-footer
+    = link_to "Edit", [:edit, :admin, @course, @lab], class: "btn btn-warning"
+    = link_to "Index", [:admin, @course, :programming_labs], class: "btn btn-secondary"
+    = link_to "Delete", [:admin, @course, @lab], method: :delete, class: "btn btn-danger"

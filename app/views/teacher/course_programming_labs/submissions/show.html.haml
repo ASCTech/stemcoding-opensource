@@ -1,0 +1,57 @@
+= render 'ides/ide_helper'
+= vite_javascript_tag "ide_teacher"
+
+.row
+  .col-sm-12.border-bottom.justify-content-between.align-items-center.flex.flex-wrap.d-flex.mb-3
+    %h4 Submitted to #{@course_lab.lab_title}
+
+.row
+  .col-sm-12.border-bottom.justify-content-between.align-items-center.flex.flex-wrap.d-flex.mb-3
+    %h4 #{@submission.author_full_name} ##{@submission.chain_index}
+    .btn-toolbar.mb-2.mb-md-0
+      = link_to 'Grade this submission', [:edit, :teacher, @course_lab, @submission], class: 'btn btn-sm btn-warning'
+
+.row
+  .col-md-8
+    = render 'ides/ide_editor'
+  .col-md-4
+    #current-submission.card
+      %h4.card-header This Submission
+      #submission-grade.card-body
+        %h5.card-title Grade
+        %p.card-text= @submission.grade
+
+      #submission-student-comment.card-body
+        %h5.card-title Student Comment
+        %p.card-text= @submission.student_comment
+
+      #submission-instructor-comment.card-body
+        %h5.card-title Instructor Comment
+        %p.card-text= @submission.instructor_comment
+
+- if @previous_submissions.any?
+  .row
+    .col-sm-12
+      %h2 Previous Submissions
+
+    %table#previous-submissions.table.table-bordered
+      %thead
+        %tr
+          %th #
+          %th Submitted On
+          %th Grade
+          %th Student Comment
+          %th Instructor Comment
+          %th Submission
+      %tbody
+        - @previous_submissions.each_with_index do |submission, index|
+          %tr
+            %td= submission.chain_index
+            %td= submission.created_at
+            %td= submission.grade
+            %td= submission.student_comment
+            %td= submission.instructor_comment
+            %td
+              = button_group(aria_label: "Submission actions") do
+                = link_to "View", [:teacher, @course_lab, submission], class: "btn btn-info"
+                = link_to "Grade", [:edit, :teacher, @course_lab, submission], class: "btn btn-warning"

@@ -1,0 +1,16 @@
+= content_for(:title, "Lab: #{@programming_lab.title}")
+
+.card
+  %h5.card-header= @programming_lab.compose
+  .card-body
+    %div Created by: #{@programming_lab.creator_complete_name}
+    %div Created on: #{@programming_lab.created_at}
+    %div Last modified: #{@programming_lab.updated_at}
+
+  .card-header Instructions
+  .card-body
+    = @programming_lab.safe_display_content(:admin)
+  .card-footer
+    = link_to "Edit", edit_admin_programming_lab_path(@programming_lab), class: "btn btn-warning"
+    = link_to "Index", %i[admin programming_labs], class: "btn btn-secondary"
+    = link_to "Delete", [:admin, @programming_lab], method: :delete, class: "btn btn-danger"

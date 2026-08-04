@@ -1,0 +1,19 @@
+#signin-form-body {
+  display: flex;
+  align-items: center;
+}
+
+#signin-form-container {
+  padding: {
+    top: 40px;
+    bottom: 40px;
+  };
+
+  width: 100%;
+  max-width: 330px;
+  margin: auto;
+}
+
+#shared-links {
+  @extend .mt-2 !optional;
+}

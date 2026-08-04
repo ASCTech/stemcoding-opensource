@@ -1,0 +1,21 @@
+-# BEGIN Hidden section for assistance with JQuery port of Vue component
+%div{ :hidden => true, :aria => {hidden: true} }
+  -# Templates
+  %div.tab-pane#template-tab{ :role => "tabpanel" }
+    - if request.user_agent.include?("iPad") || request.user_agent.include?("iPhone")
+      %pre.square-border.ace-content#editor{ :style => "height:60vh;" }
+    - else
+      %pre.square-border.ace-content#editor 
+
+  -# Table and tr are added here so that the td, which is the actual template, is rendered
+  -# properly
+  %table
+    %tr
+      %td.ide-button-tabbing#template-button-in{ :role => "group" }
+        -# replaced .btn-block with .w-100
+        %button.btn.w-100
+
+  -# Injected content
+  %div#injected-buttons-in #{encoded_buttons(@course_lab_id, current_user)}
+  %div#injected-files-in #@files_text
+-# END Hidden section for assistance with JQuery port of Vue component

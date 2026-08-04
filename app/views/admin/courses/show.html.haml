@@ -1,0 +1,55 @@
+= content_for(:title, "Show Course")
+
+.card
+  %h5.card-header= @course.compose
+  .card-body
+    %dl.row
+      %dt.col-sm-2 Created by:
+      %dd.col-sm-10= @course.creator.complete_name
+
+      %dt.col-sm-2 Created on:
+      %dd.col-sm-10= @course.created_at
+
+      %dt.col-sm-2 Last modified:
+      %dd.col-sm-10= @course.updated_at
+
+      - unless @course.template?
+        %dt.col-sm-2 Join Key:
+        %dd.col-sm-10= @course.join_key
+
+      %dt.col-sm-2 Description:
+      %dd.col-sm-10= @course.decorate.safe_description
+
+#programming-labs.card
+  %h5.card-header
+    .text-center= link_to 'Programming Labs', [:admin, @course, :programming_labs]
+
+  = link_to "Create Programming Lab", [:new, :admin, @course, :programming_lab], class: "btn btn-success btn-block square-border"
+
+  %ul.list-group.list-group-flush
+    %li.list-group-item
+      - if @programming_labs.any?
+        Course programming labs are listed below.
+      - else
+        This course does not have any associated programming labs.
+
+  - if @programming_labs.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - @programming_labs.in_groups_of(2, false) do |lab_rows|
+          %tr
+            - lab_rows.each do |lab|
+              %td= link_to lab.compose, [:admin, @course, lab]
+
+  - paginate_content = paginate @programming_labs, param_name: :programming_lab_page, window: 5
+  - unless paginate_content.blank?
+    .card-body.text-center
+      = paginate_content
+
+= render 'admin/dashboards/users', users: @students, row_count: 5, header_content: "Students", window: 8
+
+.card
+  .card-footer
+    = link_to "Edit", edit_admin_course_path(@course), class: "btn btn-warning"
+    = link_to "Index", %i[admin courses], class: "btn btn-dark"
+    = link_to "Delete", [:admin, @course], method: :delete, class: "btn btn-danger"

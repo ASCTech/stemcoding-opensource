@@ -1,0 +1,3 @@
+=content_for(:title, "Create Course")
+
+= render "form", course: @course, url: [:admin, @course], available_teachers: @available_teachers

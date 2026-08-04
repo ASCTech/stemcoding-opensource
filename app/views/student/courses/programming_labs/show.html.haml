@@ -1,0 +1,9 @@
+%h1= @course_lab.lab_title
+%h2= @course_lab.course_title
+
+.card
+  %h5.card-header Instructions
+  .card-body= @course_lab.programming_lab.decorate.safe_display_content(:student)
+  .card-footer
+    = link_to 'Submit', [:new, :student, @course_lab.course, @course_lab.programming_lab, :submission], class: 'btn btn-success'
+    = link_to 'View Submissions', [:student, @course_lab.course, @course_lab.programming_lab, :submissions], class: 'btn btn-dark'

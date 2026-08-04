@@ -1,0 +1,8 @@
+Dear students,
+
+The programming lab, <%= @course_lab.lab_title %>, for your enrolled course, <%= @course_lab.course_title %>, is <%= @course_lab.submittable? ? "open" : "closed" %> for submissions. Click the link below to go to the stemcoding site.
+
+<%= link_to @course_lab.title, student_course_programming_lab_url(@course_lab) %>
+
+Sincerely,
+The Stemcoding Staff

@@ -1,0 +1,5 @@
+license_key: 'gpl'
+toolbar:
+  - styleselect codesample | bold italic | superscript subscript | undo redo | image media | link | code
+plugins:
+  - code codesample image link media

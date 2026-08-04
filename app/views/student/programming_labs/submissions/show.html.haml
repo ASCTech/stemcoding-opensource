@@ -1,0 +1,30 @@
+= render "shared/public/disable_arrow_scroll"
+.row
+  .col-md-7
+    - if @submission.files.any?
+      %h4 The files included with this lab are:
+      %ul
+        - @submission.files.each do |file|
+          %li= link_to file.file, [:student, @programming_lab, @submission, file]
+    -else
+      %h4 This lab has no files attached.
+    - if @signed_message
+      = link_to "Edit this submission", ide_url(query: @signed_message), class: 'btn btn-warning'
+    - if @submission.files.any?
+      %h2 The rendering of the submission is below:
+      - @submission.files.each do |file|
+        = javascript_include_tag(p5_file_inline_path(file, submission: true, role: :student))
+    - else
+      %h3 There are no files with this submission.
+  .col-md-5
+    - if @submission.student_comment?
+      %h2 The student comments are below:
+      .content= @submission.student_comment
+
+    - if @submission.instructor_comment?
+      %h2 The instructor comments are below:
+      .content= @submission.instructor_comment
+
+    - if @submission.graded?
+      %h2 The grade for the submission is:
+      .content= @submission.grade

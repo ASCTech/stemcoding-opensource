@@ -1,0 +1,49 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+<% if Rails.application.config.containerized %>
+
+development:
+  <<: *default
+  database: <%= Rails.application.credentials.database.fetch(:development).fetch(:name) %>
+  host:     <%= ENV.fetch("DATABASE_HOST") %>
+  username: <%= ENV.fetch("DATABASE_USER") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+test:
+  <<: *default
+  database: <%= Rails.application.credentials.database.fetch(:test).fetch(:name) %>
+  host:     <%= ENV.fetch("DATABASE_HOST") %>
+  username: <%= ENV.fetch("DATABASE_USER") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+
+<% else %>
+
+development:
+  <<: *default
+  database: <%= Rails.application.credentials.database.fetch(:development).fetch(:name) %>
+  host:     <%= Rails.application.credentials.database.fetch(:development).fetch(:host) %>
+  username: <%= Rails.application.credentials.database.fetch(:development).fetch(:username) %>
+  password: <%= Rails.application.credentials.database.fetch(:development).fetch(:password) %>
+test:
+  <<: *default
+  database: <%= Rails.application.credentials.database.fetch(:test).fetch(:name) %>
+  host:     <%= Rails.application.credentials.database.fetch(:test).fetch(:host) %>
+  username: <%= Rails.application.credentials.database.fetch(:test).fetch(:username) %>
+  password: <%= Rails.application.credentials.database.fetch(:test).fetch(:password) %>
+
+<% end %>
+
+staging:
+  <<: *default
+  database: <%= Rails.application.credentials.database.fetch(:staging).fetch(:name) %>
+  host:     <%= Rails.application.credentials.database.fetch(:staging).fetch(:host) %>
+  username: <%= Rails.application.credentials.database.fetch(:staging).fetch(:username) %>
+  password: <%= Rails.application.credentials.database.fetch(:staging).fetch(:password) %>
+production:
+  <<: *default
+  database: <%= Rails.application.credentials.database.fetch(:production).fetch(:name) %>
+  host:     <%= Rails.application.credentials.database.fetch(:production).fetch(:host) %>
+  username: <%= Rails.application.credentials.database.fetch(:production).fetch(:username) %>
+  password: <%= Rails.application.credentials.database.fetch(:production).fetch(:password) %>

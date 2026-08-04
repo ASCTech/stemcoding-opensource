@@ -1,0 +1,9 @@
+.file-fields.nested-fields
+  %hr
+  .form-row
+    .col-11
+      = f.input :file, input_html: { class: 'programming-lab-file' }
+      - if f.object.file?
+        Current file: #{f.object[:file]}
+    .col= link_to_remove_association "Remove File", f, class: "btn btn-danger"
+

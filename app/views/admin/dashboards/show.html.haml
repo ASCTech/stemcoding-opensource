@@ -1,0 +1,8 @@
+
+.row
+  .col-md-6
+    = render 'admin/dashboards/programming_labs', programming_labs: @programming_labs, row_count: 2
+    = render 'admin/dashboards/courses', courses: @courses, row_count: 2, course_id: "courses"
+
+  .col-md-6
+    = render 'admin/dashboards/users', users: @users, row_count: 3

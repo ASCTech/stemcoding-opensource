@@ -1,0 +1,9 @@
+= content_for(:title, "Student Dashboard")
+
+.row
+  .col-sm-12
+    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+      %h1.h2 Student Dashboard
+      .btn-toolbar.mb-2.mb-md-0
+        = link_to "Join a course", new_student_enrollment_path, class: "btn btn-primary", type: "button"
+    = render 'student/courses/table', courses: @courses

@@ -1,0 +1,19 @@
+- courses ||= []
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Course
+      %th Programming Lab
+      %th Grade
+      %th Latest Submission
+  %tbody
+    - courses.each do |course|
+      - course_labs_count = course.course_labs_count
+      - course_lab, *rest_course_labs = course.course_labs.reorder_by_position
+
+      - if course_lab.present?
+        = render "student/courses/table_row", rowspan: course_labs_count, course_lab: course_lab, enrollments: current_user.enrollments, first_row: true
+
+      - rest_course_labs.each do |course_lab|
+        = render "student/courses/table_row", course_lab: course_lab, enrollments: current_user.enrollments

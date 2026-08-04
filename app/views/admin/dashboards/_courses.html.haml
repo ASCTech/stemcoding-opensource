@@ -1,0 +1,38 @@
+- header_content ||= link_to 'Courses', [:admin, :courses]
+- window ||= 5
+- row_count ||= 2
+- show_create ||= true
+- param_name ||= :course_page
+- is_template ||= false
+
+.card{id: course_id}
+  .card-header
+    %h5.mb-0.card-title.text-center= header_content
+
+  - if show_create
+    = link_to "Create Course", %i[new admin course], class: "btn btn-success btn-block square-border"
+
+  .card-body
+    - if courses.any?
+      - if is_template
+        %p.mb-0 Course templates that are currently registered within the system.
+      - else
+        %p.mb-0 Courses that are currently registered within the system.
+    - else
+      - if is_template
+        %p.mb-0 No course templates are currently stored in the database.
+      - else
+        %p.mb-0 No courses are currently stored in the database.
+
+  -if courses.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - courses.in_groups_of(row_count, false) do |course_rows|
+          %tr
+            - course_rows.each do |course|
+              %td= link_to course.compose, [:admin,  course]
+
+  - paginated_courses = paginate courses, param_name: param_name, window: window
+  - unless paginated_courses.blank?
+    .card-footer.text-center
+      = paginated_courses

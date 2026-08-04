@@ -1,0 +1,22 @@
+.card
+  %h5.card-header= @code_project.name
+  .card-body
+    %dl.row
+      %dt.col-sm-1 Description
+      %dd.co-sm-11= @code_project.description.html_safe
+    - if @code_project.code_project_files.any?
+      %ul#code-project-files.nav.nav-tabs{ role: "tablist" }
+        - @code_project_files.each_with_index do |code_file, index|
+          = tab(id: code_file.name.parameterize, active: index.zero?) do
+            = code_file.name
+
+      .tab-content#code-project-filesContent
+        - @code_project_files.each_with_index do |code_file, index|
+          = tab_pane(id: code_file.name.parameterize, active: index.zero?) do
+            %pre=code_file.content
+
+    %li.list-group-item
+      .row
+        .col-md-4= link_to "Submit", new_code_project_submission_path(@code_project), class: "btn btn-success btn-block square-border"
+        .col-md-4= link_to "Open in IDE", ide_path(query: @code_project.gen_signed_message), class: "btn btn-primary btn-block square-border"
+        .col-md-4= link_to "Delete this project", code_project_path(@code_project), method: :delete, class: "btn btn-danger btn-block square-border"

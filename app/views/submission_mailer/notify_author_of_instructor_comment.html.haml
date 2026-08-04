@@ -1,0 +1,10 @@
+%p Dear #{@submission.author_full_name},
+
+%p An instructor has commented on your submission for #{@course_lab.title}. You may view it by clicking the link below:
+
+%p= link_to "Submission for #{@course_lab.title}", student_course_programming_lab_submission_url(@course_lab, @submission)
+
+%p
+  Sincerely,
+  %br
+  The Stemcoding Staff

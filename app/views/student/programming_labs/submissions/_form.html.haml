@@ -1,0 +1,32 @@
+- previous_submissions ||= []
+
+.row
+  .col-sm-12
+    %h1 New submission for #{programming_lab.title}
+
+= simple_form_for [:student, programming_lab, submission] do |f|
+  .row
+    .col-sm-9
+      = f.input :student_comment, label: 'Comments', input_html: {rows: 15}
+      %h3 files
+      #files
+        = f.simple_fields_for :files do |file|
+          = render 'file_fields', f: file
+        .links= link_to_add_association 'add file', f, :files
+    .col-sm-3
+      - if previous_submissions.any?
+        %h3 Previous Instructor Comments
+
+        %table.table.table-striped#instructor-comments
+          %thead
+            %tr
+              %th #
+              %th Instructor Comment
+          %tbody
+            - previous_submissions.each_with_index do |previous_submission, index|
+              %tr.instructor-comment
+                %td= index + 1
+                %td= previous_submission.instructor_comment
+  .row
+    .col-sm-12
+      = f.button :submit, class: 'btn btn-primary'

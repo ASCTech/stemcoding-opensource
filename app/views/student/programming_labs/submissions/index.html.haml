@@ -1,0 +1,7 @@
+%h1
+  Submissions for
+  = link_to @programming_lab.compose, [:student,  @programming_lab]
+
+%ol#submissions
+  - @submissions.each do |submission|
+    %li= link_to submission.compose, [:student, @programming_lab, submission], class: 'submission'

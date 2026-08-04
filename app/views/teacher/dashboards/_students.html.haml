@@ -1,0 +1,28 @@
+- header_content ||= "Students"
+- message ||= ""
+- window ||= 5
+- row_count ||= 2
+- students ||= []
+
+.card
+  %h5.card-header
+    .text-center= header_content
+
+  %ul.list-group
+    - if students.any?
+      %li.list-group-item The students enrolled in this course are listed below.
+    - else
+      %li.list-group-item This course does not have any students.
+
+  - if students.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - students.in_groups_of(row_count, false) do |student_rows|
+          %tr
+            - student_rows.each do |student|
+              %td= student.complete_name
+
+  - paginate_content = paginate students, param_name: :student_page, window: window
+  - unless paginate_content.blank?
+    .panel-body.text-center
+      = paginate_content

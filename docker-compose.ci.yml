@@ -1,0 +1,21 @@
+# CI overrides. Use explicitly with:
+#   docker compose -f docker-compose.yml -f docker-compose.ci.yml ...
+# Resets the runner's volumes so host code is NOT mounted and the
+# gems/node_modules baked into the image are used instead of empty named
+# volumes.
+services:
+  runner:
+    image: stemcoding:latest
+    volumes: !reset []
+    environment:
+      RAILS_ENV: test
+      NODE_ENV: test
+    # So the Selenium container can resolve the app's subdomain hosts (used by
+    # the p5 "player" system specs) back to this container. Requires
+    # `docker compose run --use-aliases`.
+    networks:
+      default:
+        aliases:
+          - lvh.me
+          - test.lvh.me
+          - player.lvh.me

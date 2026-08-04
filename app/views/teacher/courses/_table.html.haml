@@ -1,0 +1,50 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{colspan: 3}
+      %th{colspan: 2} Submissions
+    %tr
+      %th Course
+      %th Gradebook
+      %th Lab
+      %th # ungraded submissions
+      %th Actions
+  %tbody
+    - courses.each do |course|
+      - course_labs_count = course.course_labs_count
+      - rowspan = course_labs_count.zero? ? 1 : course_labs_count
+
+
+      - course_lab, *rest_course_labs = course.course_labs.reorder_by_position
+
+      - # first course row
+      %tr
+        - # Course title
+        %td{rowspan: rowspan}= link_to course.title, [:teacher, course]
+
+        - # Gradebook
+        %td{rowspan: rowspan}= link_to "Gradebook", [:teacher, course, :gradebook]
+
+        - # Course lab
+        %td= link_to course_lab.lab_title, [:teacher, course_lab] if course_lab.present?
+
+        - # Ungraded submissions
+        %td{ id: course_lab.present? ? "course-lab-#{course_lab.id}-ungraded-submissions" : "", |
+            class: (course_lab&.has_ungraded_submissions? ? "table-danger" : "") }
+          = course_lab&.most_recent_ungraded_submissions_count
+
+        - # course lab actions
+        %td= render 'course_programming_labs/submittable_form', course_lab: course_lab, url: [:teacher, course_lab] if course_lab.present?
+
+      - # rest course rows
+      - rest_course_labs.each do |course_lab|
+        %tr
+          - # Course lab
+          %td= link_to course_lab.lab_title, [:teacher, course_lab]
+
+          - # Ungraded submissions
+          %td{ id: "course-lab-#{course_lab.id}-ungraded-submissions", class: (course_lab.has_ungraded_submissions? ? "table-danger" : "") }
+            = course_lab.most_recent_ungraded_submissions_count
+
+          - # course lab actions
+          %td= render 'course_programming_labs/submittable_form', course_lab: course_lab, url: [:teacher, course_lab]

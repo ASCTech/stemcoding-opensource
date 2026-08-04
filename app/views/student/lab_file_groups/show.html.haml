@@ -1,0 +1,22 @@
+= render 'shared/p5_includes'
+
+.row
+  - if @lab_file_group.has_downloadable_files?
+    .col-sm-12
+      .card#lab-file-group
+        %h5.card-header= @lab_file_group.title
+        .card-body
+          .card-title Files
+        %ul#files-list.list-group.list-group-flush
+          - @lab_file_group.files.each do |file|
+            %li.list-group-item
+              = link_to file[:file], [:student, @lab_file_group, file]
+        .card-footer#lab-actions
+          = link_to "Edit", ide_url(query: @signed_message), class: 'btn btn-warning'
+      %hr
+  - else
+    #player
+      - @lab_file_group.files.each do |file|
+        = javascript_include_tag(p5_file_inline_path(file))
+
+

@@ -1,0 +1,55 @@
+%nav.navbar.navbar-expand-lg.bg-body-tertiary
+  .container-fluid
+    = link_to root_url, class: 'navbar-brand' do
+      = vite_image_tag 'images/STEMcoding_v7_transparent.png'
+    %button.navbar-toggler{"aria-controls" => "primary-navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#primary-navbar", "data-bs-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #primary-navbar.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item= link_to "Sandbox", ide_path, class: "nav-link"
+        %li.nav-item= link_to "Projects", code_projects_path, class: "nav-link"
+
+        - # Student Dropdown
+        - if policy(%i[student dashboard]).show?
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
+              Student
+            %ul#student-dropdown-menu.dropdown-menu
+              %li= link_to "Dashboard", student_dashboard_path, class: "dropdown-item"
+              %li= link_to "View Current Courses", student_courses_path, class: "dropdown-item"
+              %li
+                %hr.dropdown-divider
+              %li= link_to "Join a course", new_student_enrollment_path, class: "dropdown-item"
+        
+        - # Teacher Dropdown
+        - if policy(%i[teacher dashboard]).show?
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
+              Teacher
+            %ul#teacher-dropdown-menu.dropdown-menu
+              %li= link_to "Dashboard", teacher_dashboard_path, class: "dropdown-item"
+              %li= link_to "View Programming Labs", teacher_course_programming_labs_path, class: "dropdown-item"
+
+              - if policy([:super_teacher, ProgrammingLab.new]).create?
+                %li
+                  %hr.dropdown-divider
+                %li= link_to "Create Lab", new_super_teacher_programming_lab_path, class: "dropdown-item"
+        
+        - # Admin Dropdown
+        - if policy(%i[admin dashboard]).show?
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button"}
+              Admin
+            %ul#admin-dropdown-menu.dropdown-menu
+              %li= link_to "Dashboard", admin_dashboard_path, class: "dropdown-item"
+              %li
+                %hr.dropdown-divider
+              %li= link_to "Create Lab", new_admin_programming_lab_path, class: "dropdown-item"
+              %li= link_to "Show Labs", admin_programming_labs_path, class: "dropdown-item"
+              %li
+                %hr.dropdown-divider
+              %li= link_to "Create Course", new_admin_course_path, class: "dropdown-item"
+              %li= link_to "Show Courses", admin_courses_path, class: "dropdown-item"
+      %ul.navbar-nav
+        %li.nav-item
+          = link_to "Sign Out", destroy_user_session_path, class: "nav-link", method: :delete

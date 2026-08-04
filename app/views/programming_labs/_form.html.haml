@@ -1,0 +1,15 @@
+= simple_form_for programming_lab, url: url do |f|
+  = f.input :title
+  = f.input :content, as: :text, input_html: {class: "tinymce", rows: 10, cols: 120}, hint: "Embed links to file groups by wrapping `[]` around the file group key (e.g. [key])."
+  = f.input :teacher_notes, input_html: {class: "tinymce", rows: 10, cols: 120}
+  = f.input :use_norandom_p5
+  #file-groups-card.card
+    %h5.card-header File Groups
+    #file-groups.card-body
+      = f.simple_fields_for(:file_groups) do |file_group|
+        = render "programming_labs/file_group_fields", f: file_group
+    .card-footer
+      = link_to_add_association "Add Group", f, :file_groups, class: "btn btn-success", data: { association_insertion_node: "#file-groups", association_insertion_method: "append" }
+
+  = f.submit class: "btn btn-primary"
+  = tinymce

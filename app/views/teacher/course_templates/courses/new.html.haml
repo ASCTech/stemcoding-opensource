@@ -1,0 +1,5 @@
+%p The selected template is: #{@course_template.compose}
+
+= simple_form_for @course, url: teacher_course_template_courses_path do |f|
+  = f.input :title
+  = f.submit

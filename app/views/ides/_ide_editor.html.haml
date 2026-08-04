@@ -1,0 +1,23 @@
+-# BEGIN editor
+
+.d-flex.justify-content-between.align-items-center.mb-2
+  - if request.user_agent.include?("Mac") || request.user_agent.include?("iPad") || request.user_agent.include?("iPhone")
+    %p.my-0 Advice: To undo your last change to the code press and hold Cmd and then press Z
+  - else
+    %p.my-0 Advice: To undo your last change to the code press and hold Ctrl and then press Z
+    
+  .button-group
+    %button#split-screen-btn.btn.btn-outline-secondary{type: "button"} Split Screen
+    %button#fullscreen-btn.btn.btn-outline-secondary{type: "button", title: "Enter Fullscreen"}
+      %i.fas.fa-expand
+    
+-# Injection point for the main editor embeds
+%ul.nav.nav-tabs#content-nav
+
+-# Code editors container rendered in script
+.tab-content#content-ide-tabs
+
+-# Code actions container
+%table.table.table-bordered.table-ide-buttons
+  %tr#content-button-in
+-# END editor

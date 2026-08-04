@@ -1,0 +1,46 @@
+= content_for(:title, "Grade Submission")
+
+= render 'ides/ide_helper_grading'
+= vite_javascript_tag "ide_teacher"
+
+.row
+  .col-sm-12.border-bottom.justify-content-between.align-items-center.flex.flex-wrap.d-flex.mb-3
+    %h4 Submitted to #{link_to @course_lab.lab_title, [:teacher, @course_lab], target: "_blank"}
+
+.row
+  .col-sm-12.border-bottom.justify-content-between.align-items-center.flex.flex-wrap.d-flex.mb-3
+    %h4 #{@submission.author_full_name} ##{@submission.chain_index}, Submitted: #{@submission.created_at}
+
+.row
+  .col-md-8
+    = render 'ides/ide_editor_teacher'
+
+  .col-md-4
+    = render 'form', submission: @submission, url: [:teacher, @course_lab, @submission]
+
+- if @previous_submissions.any?
+  .row
+    .col-sm-12
+      %h2 Previous Submissions
+
+      %table#previous-submissions.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Submitted On
+            %th Grade
+            %th Student Comment
+            %th Instructor Comment
+            %th Submission
+        %tbody
+          - @previous_submissions.includes(:author).each_with_index do |submission, index|
+            %tr
+              %td= submission.chain_index
+              %td= submission.updated_at
+              %td= submission.grade
+              %td= submission.student_comment
+              %td= submission.instructor_comment
+              %td
+                = button_group(aria_label: "Submission actions") do
+                  = link_to "View", [:teacher, @course_lab, submission], class: "btn btn-info"
+                  = link_to "Grade", [:edit, :teacher, @course_lab, submission], class: "btn btn-warning"

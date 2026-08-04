@@ -1,0 +1,11 @@
+- available_teachers = Array(available_teachers)
+
+= simple_form_for course, url: url do |f|
+  = f.input :title
+  = f.input :description, input_html: {class: "tinymce", rows: 10, cols: 120}
+  = f.input :join_key
+  = f.association :programming_labs, collection: ProgrammingLab.order(:title), as: :check_boxes
+  - if available_teachers.any?
+    = f.association :teachers, as: :check_boxes, collection: available_teachers, label_method: :complete_name, value_method: :id, label: "Teachers (besides you)"
+  = f.submit
+  = tinymce

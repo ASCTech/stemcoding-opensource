@@ -1,0 +1,31 @@
+- header_content ||= link_to 'Programming Labs', %i[admin programming_labs]
+- window ||= 5
+- row_count ||= 2
+- show_create ||= true
+- param_name ||= :programming_lab_page
+
+#programming-labs.card
+  .card-header
+    %h5.mb-0.card-title.text-center= header_content
+
+  - if show_create
+    = link_to "Create Programming Lab", %i[new admin programming_lab], class: "btn btn-success btn-block square-border"
+
+  .card-body
+    - if programming_labs.any?
+      %p.mb-0 Course programming labs are listed below.
+    - else
+      %p.mb-0 This course does not have any associated programming labs.
+
+  - if programming_labs.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - programming_labs.in_groups_of(row_count, false) do |programming_lab_rows|
+          %tr
+            - programming_lab_rows.each do |programming_lab|
+              %td= link_to programming_lab.compose, [:admin, programming_lab]
+  
+  - paginate_content = paginate programming_labs, param_name: param_name, window: window
+  - unless paginate_content.blank?
+    .card-footer.text-center
+      = paginate_content

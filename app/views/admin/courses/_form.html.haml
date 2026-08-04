@@ -1,0 +1,9 @@
+= simple_form_for course, url: url do |f|
+  = f.input :title
+  = f.input :description, input_html: {class: "tinymce", rows: 10, cols: 120}
+  = f.input :template
+  = f.input :join_key
+  = f.association :programming_labs, as: :check_boxes
+  = f.association :teachers, as: :check_boxes, collection: available_teachers, label_method: :complete_name, value_method: :id
+  = f.submit class: "btn btn-primary"
+  = tinymce

@@ -1,0 +1,8 @@
+%h1= @course_lab.lab_title
+%h2= @course_lab.course_title
+
+.card
+  .card-header
+    %h5{style: "display: inline-block;"} Instructions
+    = link_to 'View Submissions', [:student, @course_lab, :submissions], class: 'btn btn-dark btn-sm float-right'
+  .card-body= @course_lab.decorate.safe_display_content(:student)

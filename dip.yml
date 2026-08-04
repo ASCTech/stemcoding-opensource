@@ -1,0 +1,33 @@
+version: "2"
+
+compose:
+  files:
+    - docker-compose.yml
+  project_name: stemcoding
+
+interaction:
+  bash:
+    service: runner
+    command: /bin/bash
+
+  bundle:
+    service: rails
+    command: bundle
+
+  rails:
+    service: rails
+    command: bundle exec rails
+
+  rspec:
+    service: runner
+    environment:
+      RAILS_ENV: test
+    command: bundle exec rspec
+
+  psql:
+    service: rails
+    command: psql -h postgres -U postgres
+
+provision:
+  - dip compose down --volumes
+  - dip bash -c ./bin/setup

@@ -1,0 +1,7 @@
+=content_for(:title, "List Course")
+
+.row
+  .col-md-6
+    = render 'admin/dashboards/courses', courses: @templates, row_count: 2, header_content: "Course Templates", param_name: :template_course_page, show_create: false, is_template: true, course_id: "course-templates"
+  .col-md-6
+    = render 'admin/dashboards/courses', courses: @courses, row_count: 2, header_content: "Courses", show_create: false, is_template: false, course_id: "courses"

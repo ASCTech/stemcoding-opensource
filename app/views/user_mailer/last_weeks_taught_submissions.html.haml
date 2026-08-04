@@ -1,0 +1,19 @@
+%p Hello #{@user.full_name},
+%p Listed below are the submissions for courses where you are listed as a teacher for the week of: #{@last_week} to #{@today}:
+
+%table
+  %thead
+    %tr
+      %th Submission Date
+      %th Course
+      %th Programming Lab
+      %th Student
+      %th Link
+  %tbody
+    - @submissions.each do |submission|
+      %tr
+        %td= submission.created_at
+        %td= link_to submission.course_title, teacher_course_url(submission.course)
+        %td= link_to submission.lab_title, teacher_programming_lab_url(submission.programming_lab)
+        %td= submission.author_email
+        %td= link_to submission.compose, teacher_course_programming_lab_submission_url(submission.course_programming_lab, submission)

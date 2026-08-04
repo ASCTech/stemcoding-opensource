@@ -1,0 +1,18 @@
+= content_for(:title, 'Show Course Template')
+
+= render 'teacher/resource', resource: @course_template
+
+%h2 Course description is:
+%p
+  .content~ @course_template.decorate.safe_description
+
+- if @course_template.programming_labs.any?
+  %h2 The programming labs in this course are:
+  %ul
+    - @course_template.programming_labs.each do |pl|
+      %li= pl.compose
+- else
+  %h2 This course does not have any associated programming labs.
+
+%div
+  = link_to 'Clone this course', new_teacher_course_template_courses_path(@course_template), class: "btn btn-success"

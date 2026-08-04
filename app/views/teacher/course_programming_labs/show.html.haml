@@ -1,0 +1,43 @@
+.row.d-flex.flex-column
+  .col-sm-12
+    %nav#course-lab-navbar.navbar.navbar-light.bg-light
+      = link_to @course_lab.lab_title, [:teacher, @course_lab], class: "navbar-brand"
+      .mr-auto
+        = render 'course_programming_labs/submittable_form', course_lab: @course_lab, url: [:teacher, @course_lab]
+      %ul.nav.nav-pills
+        %li.nav-item= link_to "Instructions", "#instructions", class: "nav-link"
+        %li.nav-item= link_to "Submissions", "#submissions", class: "nav-link"
+    %div{data: { spy: "scroll", target: "#course-lab-navbar", offset: "0" } }
+
+      / Lab Instructions
+
+      #instructions.card
+        .card-header Instructions
+        .card-body= @lab.safe_display_content(:teacher)
+
+      - if @lab.teacher_notes
+        #teacher-notes.card
+          .card-header Teacher Notes.
+          .card-body= @lab.teacher_notes.html_safe
+
+      / Student Submissions
+
+      #submissions.card
+        .card-header Submissions
+        %table.table.table-striped.table-bordered.card-table
+          %thead
+            %tr
+              %th #
+              %th Students
+              %th Latest Submission
+          %tbody
+            - @enrollments.each_with_index do |enrollment, index|
+              %tr{ id: "enrollment-#{enrollment.id}" }
+                %td= index + 1
+                %td= enrollment.full_name
+                %td
+                  - submission = enrollment.latest_submission_for_lab(@course_lab.programming_lab)
+                  - if submission.present? && policy([:teacher, submission]).edit?
+                    = link_to submission.compose, edit_teacher_course_programming_lab_submission_path(@course_lab, submission)
+                  - else
+                    No student submission

@@ -1,0 +1,39 @@
+= content_for(:title, "Course: " + @course.title)
+
+= render 'teacher/resource', resource: @course
+
+.card
+  %h5.card-header Join Key
+  #join-key.card-body= @course.join_key
+
+.card
+  %h5.card-header
+    Description
+  .card-body= @course.decorate.safe_description
+
+.card
+  %h5.card-header
+    Programming Labs
+  .card-body
+    - if @course_labs.any?
+      The course's programming labs are listed below.
+    - else
+      This course does not have any programming labs.
+
+  = simple_form_for @course, url: [:teacher, @course], remote: true, data: {controller: "sortable-list", sortable_list_container: ".list-group", sortable_list_draggable_selector: ".draggable", sortable_list_drag_handle: ".drag-handle"} do |f|
+    = f.button :submit, class: "d-none", data: { target: "sortable-list.submit" }
+    %ul.list-group.list-group-flush
+      = f.simple_fields_for :course_programming_labs, @course_labs do |cl_form|
+        %li.list-group-item.draggable
+          = fa_icon("grip-lines", class: "drag-handle")
+          = link_to cl_form.object.lab_title, [:teacher, cl_form.object]
+          = cl_form.input :position, as: :hidden, input_html: {data: {target: "sortable-list.position"}}
+
+= render 'teacher/dashboards/students', students: @students, row_count: 5, window: 8, message: @student_message
+
+%div
+  = link_to 'Gradebook', teacher_course_gradebook_path(@course), class: "btn btn-primary"
+  - if policy([:teacher, @course]).edit?
+    = link_to 'Edit', edit_teacher_course_path(@course), class: "btn btn-warning"
+  - if policy([:teacher, @course]).destroy?
+    = link_to 'Delete', [:teacher, @course], method: :delete, class: "btn btn-danger"

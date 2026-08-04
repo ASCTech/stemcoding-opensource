@@ -1,0 +1,14 @@
+= simple_form_for @code_project do |f|
+  = f.input :name, label: "Project name"
+  = f.input :description, label: "Description (optional)", input_html: { class: "tinymce", rows: 10, cols: 120 }
+  = f.hidden_field :query, value: @signed_message
+
+  - if @signed_message && @file_names.any?
+    .card
+      .card-header File List
+      %ul.list-group.list-group-flush
+      - @file_names.each do |file_name|
+        %li.list-group-item= file_name
+  %hr
+  = f.submit "Save Project", class: "btn btn-success"
+  = tinymce

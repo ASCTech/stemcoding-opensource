@@ -1,0 +1,37 @@
+.row
+  .col-sm-12
+    = page_title("Your Labs")
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Lab
+          %th Actions
+        %tbody
+        - @programming_labs.each do |lab|
+          %tr
+            - if policy([:super_teacher, lab]).update?
+              %td
+                = link_to lab.title, teacher_programming_lab_path(lab)
+              %td
+                = link_to [:edit, :super_teacher, lab], class: "btn btn-warning" do
+                  %i.fas.fa-pen
+                  Edit
+
+.row
+  .col-sm-4.text-center
+
+    = link_to "Create Programming Lab", %i[new super_teacher programming_lab], class: "btn btn-success btn-block square-border"
+
+.row
+  .col-sm-12
+    = page_title("All Programming Labs")
+
+#programming-labs.card
+
+  - if @programming_labs.any?
+    %table.table.table-bordered.card-table
+      %tbody
+        - @programming_labs.in_groups_of(3, false) do |lab_rows|
+          %tr
+            - lab_rows.each do |lab|
+              %td= link_to lab.compose, [:teacher, @course, lab]

@@ -1,0 +1,4 @@
+= simple_form_for Submission.new, url: code_project_submissions_path(@code_project) do |f|
+  = f.association :course_programming_lab, as: :radio_buttons, collection: @course_labs, label_method: :title, label_value: :id
+  = f.input :student_comment, as: :text, label: 'Comments', input_html: {rows: 15}
+  = f.submit "Submit Project", class: "btn btn-success"

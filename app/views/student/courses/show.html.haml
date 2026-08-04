@@ -1,0 +1,14 @@
+%h1= @course.compose
+
+.card
+  %h5.card-header Description
+  .card-body= @course.decorate.safe_description
+
+  - if @course_labs.any?
+    %h5.card-header Assignments
+    .card-body The assignments in this course are listed below.
+    %ul.list-group.list-group-flush
+      - @course_labs.each do |course_lab|
+        %li.list-group-item= link_to course_lab.lab_title, [:student, course_lab]
+  .card-footer
+    = link_to "Gradebook", student_course_gradebook_path(@course), class: "btn btn-primary"

@@ -1,0 +1,3 @@
+= content_for(:title, "Create Programming Lab for #{@course.compose}")
+
+= render "programming_labs/form", programming_lab: @programming_lab, url: [:admin, @course, @programming_lab]

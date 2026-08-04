@@ -1,0 +1,73 @@
+%h1= @user.full_name
+
+.card
+  %h5.card-header
+    Roles
+  .card-body
+    - if @user.admin?
+      .card
+        %h6.card-header Admin
+        .card-body
+          .card-title Created Courses:
+        %ul.list-group.list-group-flush
+          - @user.created_courses.each do |course|
+            %li.list-group-item= link_to course.compose, [:admin, course]
+        .card-body
+          .card-title Created Programming Labs:
+        %ul.list-group.list-group-flush
+          - @user.created_labs.each do |lab|
+            %li.list-group-item= link_to lab.compose, [:admin, lab]
+
+    - if @user.super_teacher?
+      .card
+        %h6.card-header Super Teacher
+        .card-body
+          .card-title Created Programming Labs:
+        %ul.list-group.list-group-flush
+          - @user.created_labs.each do |lab|
+            %li.list-group-item= link_to lab.compose, [:admin, lab]
+
+    - if @user.teacher?
+      .card
+        %h6.card-header Teacher
+        .card-body
+          .card-title Taught Courses:
+        %ul.list-group.list-group-flush
+          - @user.taught_courses.each do |course|
+            %li.list-group-item= link_to course.compose, [:admin, course]
+        .card-body
+          .card-title Taught Labs:
+        %ul.list-group.list-group-flush
+          - @user.taught_labs.each do |lab|
+            %li.list-group-item= link_to lab.compose, [:admin, lab]
+
+    - if @user.student?
+      .card
+        %h6.card-header Student
+        .card-body
+          .card-title Enrolled Courses:
+        %ul.list-group.list-group-flush
+          - @user.enrolled_courses.each do |course|
+            %li.list-group-item= link_to course.compose, [:admin, course]
+        .card-body
+          .card-title Enrolled Labs:
+        %ul.list-group.list-group-flush
+          - @user.enrolled_labs.each do |lab|
+            %li.list-group-item= link_to lab.compose, [:admin, lab]
+
+.card
+  %h6.card-header Contact Information
+  .card-body Email: #{link_to @user.email, "mailto:#{@user.email}"}
+
+.card
+  %h6.card-header Signin information
+  %ul.list-group.list-group-flush
+    %li.list-group-item This user last signed in at: #{@user.last_sign_in_at}
+    %li.list-group-item This user's current sign at: #{ @user.current_sign_in_at}
+    %li.list-group-item This user was last active at: #{@user.last_active_at}
+
+%hr
+
+.btn-group{role: "group", aria: { label: "User actions" }}
+  = link_to 'Edit', edit_admin_user_path(@user), class: "btn btn-warning"
+  = link_to 'Delete', [:admin, @user], method: :delete, class: "btn btn-danger"

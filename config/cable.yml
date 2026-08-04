@@ -1,0 +1,15 @@
+development:
+  adapter: async
+
+test:
+  adapter: test
+
+staging:
+  adapter: redis
+  url: <%= Rails.application.credentials.redis.fetch(Rails.env.to_sym).fetch(:url) %>
+  channel_prefix: stemcoding_staging
+
+production:
+  adapter: redis
+  url: <%= Rails.application.credentials.redis.fetch(Rails.env.to_sym).fetch(:url) %>
+  channel_prefix: stem_coding_production

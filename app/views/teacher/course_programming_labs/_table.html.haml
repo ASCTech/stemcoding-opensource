@@ -1,0 +1,20 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Course
+      %th Gradebook
+      %th Programming Lab
+  %tbody
+    - row_index = 0
+    - course_labs.each do |course_lab|
+      %tr
+        - if row_index == 0
+          - row_index += 1
+          %td{rowspan: course_lab.course.programming_labs.count}
+            = link_to course_lab.course_title, [:teacher, course_lab.course]
+          %td{rowspan: course_lab.course.programming_labs.count}= link_to "Gradebook", [:teacher, course_lab.course, :gradebook]
+        - elsif row_index == course_lab.course.programming_labs.count-1
+          - row_index = 0
+        - else
+          - row_index += 1
+        %td= link_to course_lab.lab_title, [:teacher, course_lab]

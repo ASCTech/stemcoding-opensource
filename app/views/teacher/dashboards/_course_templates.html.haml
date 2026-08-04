@@ -1,0 +1,12 @@
+.card
+  %h5.card-header= header_content.html_safe
+  %table.table.table-bordered.card-table
+    %tbody
+      - templates.in_groups_of(row_count, false) do |course_rows|
+        %tr
+          - course_rows.each do |course|
+            %td= link_to course.compose, teacher_course_template_path(course)
+
+  - paginate_content = paginate templates, param_name: :template_page, window: window
+  - unless paginate_content.blank?
+    .card-body.text-center= paginate_content

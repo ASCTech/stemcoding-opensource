@@ -1,0 +1,262 @@
+$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "bootstrap/scss/bootstrap";
+
+.alert-notice {
+  @extend .alert-success !optional;
+}
+
+.alert-error,
+.alert-alert {
+  @extend .alert-danger !optional;
+}
+
+@import "forms/signin";
+@import "forms/forms";
+@import "navbar";
+
+html,
+body {
+  height: 100%;
+}
+
+#content:has(#content-button-in) {
+  padding-bottom: 56px;
+}
+
+.square-border {
+  border-radius: 0 !important;
+}
+
+.sortable li {
+  cursor: move;
+}
+
+.ide-button-tabbing {
+  margin: 10px;
+  padding: 10px;
+}
+
+.navbar-brand>img {
+  position: relative;
+  top: -15px;
+  height: 50px;
+  width: 266px;
+}
+
+.navbar-secondary {
+  margin-bottom: 2rem;
+  background-color: #fff;
+  border-color: #ddd;
+
+  &.navbar-default .navbar-brand {
+    color: #666;
+  }
+
+  &.navbar-default .navbar-nav>li>a {
+    color: #666;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  &.navbar-default .navbar-nav>.open>a,
+  &.navbar-default .navbar-nav>.open>a:hover,
+  .navbar-default .navbar-nav>.open>a:focus {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+}
+
+.card#programming-labs {
+  margin-bottom: calc(var(--bs-gutter-x));
+}
+
+.card {
+  table {
+    td:nth-child(odd) {
+      border-left-width: 0;
+    }
+    td:nth-child(even) {
+      border-right-width: 0;
+    }
+    tr:last-child {
+      border-bottom-width: 0;
+    }
+  }
+  &#users {
+    table {
+      td {
+        border-right-width: 1px;
+      }
+      td:nth-child(1) {
+        border-left-width: 0;
+      }
+      td:nth-child(3) {
+        border-right-width: 0;
+      }
+      tr:last-child {
+        td:last-child {
+          border-right-width: 1px;
+        }
+      }
+    }
+  }
+}
+
+.card-table {
+  margin-bottom: 0;
+}
+
+.drag-handle {
+  cursor: grab;
+}
+
+.draggable {
+  user-select: none;
+}
+
+code {
+  color: black;
+}
+
+/*for the locked headers*/
+th {
+  outline-style: solid;
+  outline-color: rgb(192, 190, 190);
+  background: white;
+  position: sticky;
+
+  top: 0;
+}
+
+/* Styling for the split screen START */
+
+#content-ide-tabs {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  min-width: 0;
+}
+
+#result-frame-container {
+  position: relative;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  min-width: none;
+}
+
+.resizer {
+  width: 5px;
+  background-color: #f1f1f1;
+  cursor: col-resize;
+  display: none;
+}
+
+.resizer:hover,
+.split-screen-container.resizing .resizer {
+  background-color: #0d6efd;
+}
+
+.split-screen-container.resizing {
+  cursor: col-resize;
+}
+
+.split-screen-container.resizing iframe {
+  pointer-events: none;
+  /* Prevent iframe from capturing mouse events during resize */
+}
+
+#result-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.checkbox-container {
+  float: right;
+  margin-right: 2rem;
+}
+
+.tab-content,
+.tab-pane {
+  position: relative;
+  height: 100%;
+}
+
+#split-screen-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  color: #6c757d;
+  background-color: transparent;
+  border: 1px solid #6c757d;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  &.active {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+}
+
+/* Styling for the split screen END */
+
+/* Fullscreen button styles */
+#fullscreen-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#fullscreen-btn i {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* Group the fullscreen and split screen buttons together on the right */
+.button-group {
+  margin-top: 0.25rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* move ide buttons down */
+.table-ide-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0 !important;
+  z-index: 10;
+}
+
+.split-screen-container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 14rem);
+  position: relative;
+}
+
+.ace-content {
+  height: calc(100vh - 14rem) !important;
+  margin-bottom: 0 !important;
+}

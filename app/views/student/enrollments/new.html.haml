@@ -1,0 +1,5 @@
+%h1 Join a course with a join key
+
+= simple_form_for @signup, url: [:student, @enrollment] do |f|
+  = f.input :join_key, as: :string, label: "Enter your course's join key:"
+  = f.submit "Join course", class: "btn btn-success"

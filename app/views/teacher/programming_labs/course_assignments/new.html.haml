@@ -1,0 +1,5 @@
+.row
+  .col-md-6
+    = simple_form_for @course_assignment, url: [:teacher, @programming_lab, @course_assignment] do |f|
+      = f.input :courses, collection: @courses, as: :check_boxes
+      = f.button :submit, "Assign courses", class: "btn btn-primary"

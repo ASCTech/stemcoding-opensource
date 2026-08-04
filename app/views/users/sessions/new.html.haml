@@ -1,0 +1,11 @@
+#signin-form-container.text-center
+  = vite_image_tag 'images/STEMcoding_v7_transparent.png', class: "img-fluid mb-4"
+  %h1.h3.mb-3.font-weight-normal Please sign in
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: 'signin-form') do |f|
+    .form-inputs
+      = f.input :email, autofocus: true, placeholder: "Email Address", label_html: {class: 'sr-only'}, wrapper_html: {class: "mb-0"}
+      = f.input :password, placeholder: "Password", label_html: { class: 'sr-only'}, wrapper_html: {class: "mt-0"}
+      = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+    .form-actions
+      = f.button :submit, "Log in", class: "btn btn-primary btn-lg btn-block"
+  = render "devise/shared/links"

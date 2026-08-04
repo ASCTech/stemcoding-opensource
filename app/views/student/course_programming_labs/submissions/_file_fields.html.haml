@@ -1,0 +1,6 @@
+.file-fields.nested-fields
+  = f.input :file
+  - if f.object.file?
+    Current file:
+    = f.object.file
+  = link_to_remove_association "remove file", f

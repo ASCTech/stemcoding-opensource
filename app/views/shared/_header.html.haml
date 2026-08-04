@@ -1,0 +1,5 @@
+%header#header
+  - if signed_in?
+    = render 'shared/navbar'
+  .container-fluid
+    = render 'shared/flash'

@@ -1,0 +1,11 @@
+- id = "course-lab-#{course_lab.id}-submittable-checkbox"
+= simple_form_for course_lab, url: url, data: { controller: "submittable", remote: true, "submittable-enabled" => course_lab.submittable? } do |f|
+  .form-check.form-switch
+    = f.check_box :submittable, class: 'form-check-input', id: id, "data-submittable-target": "checkbox", "data-action": "click->submittable#toggle"
+    = f.label :submittable, class: 'form-check-label', for: id do
+      - if f.object.submittable?
+        = badge(context: :success, "data-submittable-target": "badge") do
+          Submissions allowed
+      - else
+        = badge(context: :warning, "data-submittable-target": "badge") do
+          Submissions prohibited

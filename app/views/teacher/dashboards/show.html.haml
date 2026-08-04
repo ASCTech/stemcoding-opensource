@@ -1,0 +1,13 @@
+= content_for(:title, "Teacher Dashboard")
+
+.row
+  .col-sm-12
+    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+      %h1.h2 Teacher Dashboard
+      .btn-toolbar.mb-2.mb-md-0
+        = button_group(aria_label: "Teacher actions") do
+          = link_to "Create course", %i[new teacher course], class: "btn btn-primary", type: "button"
+          - if policy([:super_teacher, ProgrammingLab.new]).create?
+            = link_to "Create lab", %i[new super_teacher programming_lab], class: "btn btn-warning", type: "button"
+          = link_to "View templates", %i[teacher course_templates], class: "btn btn-secondary", type: "button"
+    = render 'teacher/courses/table', courses: @courses

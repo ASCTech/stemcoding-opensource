@@ -1,0 +1,36 @@
+= render 'shared/p5_includes'
+
+%h1#lab-file-group-title= @lab_file_group.title
+
+#lab-file-group-files
+  - @lab_file_group.files.each do |file|
+    = javascript_include_tag(p5_file_inline_path(file))
+
+- if @lab_file_group.files.any?
+  %h4 The files included with this view are:
+  %ul
+    - @lab_file_group.files.each do |file|
+      %li= link_to file[:file], [:teacher, @lab_file_group, file]
+- else
+  %h4 This view has no attached files.
+
+- if @lab_file_group.downloadable?
+  %h3
+    Code viewing/editing is
+    %strong ENABLED
+    for students.
+  %h3
+    Note: Students
+    %strong CAN
+    see the Edit button*
+  %h5 *The Edit button is hidden here because this is the teacher view
+- else
+  %h3
+    Code viewing/editing is
+    %strong DISABLED
+    for students.
+
+
+
+= link_to 'Back', :back, class: 'btn btn-info'
+= render "shared/public/disable_arrow_scroll"

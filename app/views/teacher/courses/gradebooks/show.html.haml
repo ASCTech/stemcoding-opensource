@@ -1,0 +1,28 @@
+.row
+  .col-sm-12
+    .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+      %h1.h2 #{@course.title}: Gradebook
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+            Student Name
+          - @course_labs.each do |course_lab|
+            %th= course_lab.lab_title
+      %tbody
+        - @enrollments.each do |enrollment|
+          %tr{id: "enrollment-#{enrollment.id}" }
+            %td= enrollment.full_name
+
+            - @course_labs.each do |course_lab|
+              - submission = course_lab.most_recent_submission_authored_by(enrollment: enrollment)
+              %td{id: "enrollment-#{enrollment.id}-course-lab-#{course_lab.id}-submission" }
+                - if submission.present?
+                  - if submission.graded?
+                    = link_to submission.grade, edit_teacher_course_programming_lab_submission_path(course_lab, submission)
+                  - else
+                    = link_to "Not graded", edit_teacher_course_programming_lab_submission_path(course_lab, submission)
+                - else
+                  No submission
+
+    = link_to "Back to course", teacher_course_path(@course), class: "btn btn-warning"

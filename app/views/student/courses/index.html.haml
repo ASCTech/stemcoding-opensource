@@ -1,0 +1,9 @@
+- if @courses.any?
+  .card
+    %h5.card-header Courses
+    .card-body Courses in which you are currently enrolled.
+    %ul.list-group.list-group-flush
+      - @courses.each do |course|
+        %li.list-group-item= link_to course.compose, [:student, course]
+- else
+  %h3 You currently are not enrolled in any courses.

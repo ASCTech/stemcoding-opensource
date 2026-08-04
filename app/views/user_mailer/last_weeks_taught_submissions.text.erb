@@ -1,0 +1,12 @@
+Hello <%= @user.full_name %>,
+
+Listed below are the submissions for courses where you are listed as a teacher for the week of: <%= @last_week %>-<%= @today %>:
+
+Course, Programming Lab, Student, Link
+
+<% @submissions.each do |submission| %>
+  <%= link_to submission.course_title, teacher_course_url(submission.course) %>
+  <%= link_to submission.lab_title, teacher_programming_lab_url(submission.programming_lab) %>
+  <%= submission.author_email %>
+  <%= link_to submission.compose, teacher_course_programming_lab_submission_url(submission.course_programming_lab, submission) %>
+<% end %>

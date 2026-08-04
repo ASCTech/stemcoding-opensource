@@ -1,0 +1,25 @@
+- first_row ||= false
+- rowspan ||= 1
+- course = course_lab.course
+- enrollments ||= []
+- most_recent_submissions = course_lab.most_recent_submissions.authored_by(enrollments)
+
+%tr{id: "course-lab-#{course_lab.id}-row"}
+  - if first_row
+    %td{rowspan: rowspan}= link_to course.title, [:student, course]
+  %td
+    = link_to course_lab.lab_title, [:student, course_lab]
+    - unless policy([:student, most_recent_submissions.new]).create?
+      %span.badge.badge-danger
+        Submission window closed
+
+  %td
+    - if most_recent_submission = most_recent_submissions.first
+      - if most_recent_submissions.first.graded?
+        = most_recent_submissions.first.grade
+      - else
+        Latest submission not graded yet
+  %td
+    .btn-group
+      - if most_recent_submission = most_recent_submissions.first
+        = link_to "View latest submission", [:student, course_lab, most_recent_submission.submission], class: "btn btn-info"

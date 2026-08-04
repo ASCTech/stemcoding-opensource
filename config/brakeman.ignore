@@ -1,0 +1,137 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "19ffbb7fc723450aa958be5e02f047a28fc8826062a97b27aba58572e0bb1bcb",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/student/submission_files_controller.rb",
+      "line": 10,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(SubmissionFile.find(params.require(:id)).file.path, :filename => SubmissionFile.find(params.require(:id))[:file], :type => SubmissionFile.find(params.require(:id)).file.content_type, :disposition => :attachment)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Student::SubmissionFilesController",
+        "method": "show"
+      },
+      "user_input": "SubmissionFile.find(params.require(:id)).file.path",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "65c51d878d041d93ab19ae781028d53865145ed4ae6853856f5ee77969d34c9b",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/admin/lab_file_groups/programming_lab_files_controller.rb",
+      "line": 9,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(ProgrammingLabFile.find(params[:id]).file.path, :filename => ProgrammingLabFile.find(params[:id])[:file], :type => ProgrammingLabFile.find(params[:id]).file.content_type, :disposition => :attachment)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Admin::LabFileGroups::ProgrammingLabFilesController",
+        "method": "show"
+      },
+      "user_input": "ProgrammingLabFile.find(params[:id]).file.path",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "68b4327f4d89e9a10679a000c7aeb58d4fefd8d9ec81e6afac2ada914f99ead7",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/p5_file_inline_controller.rb",
+      "line": 22,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file((SubmissionFile.find(resource_id) or ProgrammingLabFile.find(resource_id)).file.path, :filename => (SubmissionFile.find(resource_id) or ProgrammingLabFile.find(resource_id)).file.filename, :type => \"text/javascript\", :disposition => :inline)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "P5FileInlineController",
+        "method": "show"
+      },
+      "user_input": "ProgrammingLabFile.find(resource_id)",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "81cc51919f44a3bb7c62545a0c2c920a6a25469c34cac9582dae444b7d64d79c",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/layouts/player.html.haml",
+      "line": 7,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "RenderFile.where(:id => verifier.verify(params[:query])[:ids]).pluck(:content).join(\"\\n\")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "PlayersController",
+          "method": "show",
+          "line": 18,
+          "file": "app/controllers/players_controller.rb",
+          "rendered": {
+            "name": "layouts/player",
+            "file": "app/views/layouts/player.html.haml"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "layouts/player"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "a83d8250442f5ae8ade6a7b56a9fc6b2770117e567914cf551c78bd4de3cce21",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/teacher/programming_labs/submissions/submission_files_controller.rb",
+      "line": 6,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(SubmissionFile.find(params[:id]).file.path, :filename => SubmissionFile.find(params[:id])[:file], :type => SubmissionFile.find(params[:id]).file.content_type, :disposition => :attachment)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Teacher::ProgrammingLabs::Submissions::SubmissionFilesController",
+        "method": "show"
+      },
+      "user_input": "SubmissionFile.find(params[:id]).file.path",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "ad8a1efcff49d1e296dd27509981b91ed7ee7bd0b747ce445ea21dd7f1e4c1c9",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/teacher/lab_file_groups/programming_lab_files_controller.rb",
+      "line": 7,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(ProgrammingLabFile.find(params[:id]).file.path, :filename => ProgrammingLabFile.find(params[:id])[:file], :type => ProgrammingLabFile.find(params[:id]).file.content_type, :disposition => :attachment)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Teacher::LabFileGroups::ProgrammingLabFilesController",
+        "method": "show"
+      },
+      "user_input": "ProgrammingLabFile.find(params[:id]).file.path",
+      "confidence": "Medium",
+      "note": ""
+    }
+  ],
+  "updated": "2019-07-25 13:36:14 -0400",
+  "brakeman_version": "4.6.1"
+}

@@ -1,0 +1,15 @@
+= content_for(:title, "Lab: #{@programming_lab.title}")
+
+.row.d-flex.flex-column
+  .col-sm-12
+    #instructions.card
+      .card-header Instructions
+      .card-body= @programming_lab.safe_display_content(:teacher)
+
+    - if @programming_lab.teacher_notes
+      #teacher-notes.card
+      .card-header Teacher Notes.
+      .card-body= @programming_lab.teacher_notes.html_safe
+
+.card-footer
+  = link_to "Edit (requires super teacher status and ownership)", edit_super_teacher_programming_lab_path(@programming_lab), class: "btn btn-warning"

@@ -1,0 +1,9 @@
+= simple_form_for submission, url: url do |f|
+  = f.input :instructor_comment
+  = f.input :grade
+  .card
+    #submission-student-comment.card-body
+      %h5.card-title Student Comment
+      %p.card-text= submission.student_comment
+  %hr
+  = f.button :submit, "Submit Grade and Comment", class: "btn btn-primary"

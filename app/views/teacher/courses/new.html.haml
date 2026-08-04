@@ -1,0 +1,4 @@
+= content_for(:title, 'Create Course')
+
+= render 'form', course: @course, url: [:teacher, @course], available_teachers: @available_teachers
+= link_to 'Cancel', :back, class: "btn btn-default"

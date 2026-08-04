@@ -1,0 +1,11 @@
+.card.nested-fields
+  .card-header File Group
+  .file-group-fields.card-body
+    = f.input :title
+    = f.input :key
+    = f.input :downloadable
+    = link_to_add_association "Add File", f, :files, class: "btn btn-success", data: {association_insertion_method: "append"}
+    = f.simple_fields_for :files do |file|
+      = render "programming_labs/file_fields", f: file
+  .card-footer
+    = link_to_remove_association "Remove Group", f, class: "btn btn-danger"

@@ -1,0 +1,7 @@
+= simple_form_for [:admin, user] do |f|
+  = f.input :student
+  = f.input :teacher
+  = f.input :super_teacher
+  = f.input :admin
+  = f.association :enrolled_courses, as: :check_boxes
+  = f.submit

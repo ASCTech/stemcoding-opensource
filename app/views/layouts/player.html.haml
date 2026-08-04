@@ -1,0 +1,7 @@
+!!!
+%html
+  = render "shared/head"
+  %body
+    = yield
+    %script
+      = @custom_script_injection.html_safe
