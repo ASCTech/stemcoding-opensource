@@ -1,13 +1,17 @@
 # STEMcoding
 
-STEMcoding is a learning management system (LMS) for teaching coding. Teachers
+The STEMcoding learning management system (LMS) is a tool for teaching coding. Teachers
 create courses and programming labs; students write and submit code in an
-in-browser editor and run [p5.js](https://p5js.org) / Processing sketches
+in-browser editor and run [p5.js](https://p5js.org) sketches
 directly in the browser.
 
-This is the STEMcoding learning management system, originally developed by
-Lilith Daemon with improvements by Kurt Mueller. The STEMcoding project is led by
-Prof. Chris Orban (orban@physics.osu.edu) at The Ohio State University.
+The STEMcoding learning management system was developed over a number of years by a number of people who are 
+or were associated with Ohio State University. Specifically, Lilith Daemon led
+the development of the first working version of the code base which was designed
+to assist with Prof. Chris Orban's physics classes at Ohio State University Marion campus.
+
+Ohio State University is the copyright holder for this code base. For the benefit of the
+education community, the code base is being released on github on the AGPLv3 license.
 
 ## Features
 
@@ -123,13 +127,11 @@ CI runs all of the above through the same Docker image (see
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and
-[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). To report a security issue, see
-[SECURITY.md](SECURITY.md).
+At this time Ohio State University can not commit to providing regular updates on any schedule or overseeing merge requests to this code base. If you are interested to contribute to this code base we recommend that you look at the forks of this repository and find an active project there. We note that Ohio State University professor Chris Orban, who helped to develop the STEMcoding Learning Management System, is involved with the STEMcoding Education Ohio fork of this code base.
+ 
+To report a security issue, see [SECURITY.md](SECURITY.md).
 
 ## License
-
-Copyright (C) 2026 The STEMcoding project.
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the **GNU Affero General Public License** as published by the Free
@@ -137,6 +139,8 @@ Software Foundation, either version 3 of the License, or (at your option) any
 later version. It is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the [LICENSE](LICENSE) file for the full text.
+
+Ohio State University is the copyright holder for this code base.
 
 Bundled third-party components (p5.js, cocoon.js, TinyMCE, brand assets) retain
 their own licenses — see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
