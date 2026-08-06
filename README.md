@@ -1,4 +1,4 @@
-# STEMcoding
+# STEMcoding LMS
 
 The STEMcoding learning management system (LMS) is a tool for teaching coding. Teachers
 create courses and programming labs; students write and submit code in an
