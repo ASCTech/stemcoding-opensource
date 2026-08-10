@@ -36,7 +36,7 @@ govern that component regardless of the license covering STEMcoding itself.
   trademarks of the Processing Foundation; this project is not affiliated with
   or endorsed by them.
 - `STEMcoding_v*.png/jpg` and other STEMcoding brand assets are the property of
-  the STEMcoding project / The Ohio State University.
+  Chris Orban
 
 ## Ruby gems and JavaScript packages
 
