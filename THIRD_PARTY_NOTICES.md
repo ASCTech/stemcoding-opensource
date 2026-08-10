@@ -31,10 +31,6 @@ govern that component regardless of the license covering STEMcoding itself.
 
 ## Trademarks / brand assets
 
-- `app/javascript/images/processing3-logo.png` is the **Processing Foundation**
-  logo and is used for identification only. The Processing name and logo are
-  trademarks of the Processing Foundation; this project is not affiliated with
-  or endorsed by them.
 - `STEMcoding_v*.png/jpg` and other STEMcoding brand assets are the property of
   Chris Orban
 
